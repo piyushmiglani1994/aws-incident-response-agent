@@ -21,10 +21,10 @@
 
   <polygon points="176,126 186,126 186,122 196,126 186,130 186,126" fill="#94a3b8"/>
 
-  <!-- SNS -->
+  <!-- EventBridge -->
   <rect x="200" y="100" width="120" height="52" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
-  <text x="260" y="122" text-anchor="middle" font-size="10" font-weight="700" fill="#9a3412">📣 SNS Topic</text>
-  <text x="260" y="138" text-anchor="middle" font-size="9" fill="#9a3412">Publishes event</text>
+  <text x="260" y="122" text-anchor="middle" font-size="10" font-weight="700" fill="#9a3412">⚡ EventBridge</text>
+  <text x="260" y="138" text-anchor="middle" font-size="9" fill="#9a3412">Rule → triggers Lambda</text>
 
   <polygon points="326,126 336,126 336,122 346,126 336,130 336,126" fill="#94a3b8"/>
 
