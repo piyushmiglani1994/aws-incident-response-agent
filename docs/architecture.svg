@@ -1,0 +1,331 @@
+<svg viewBox="0 0 1100 820" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+
+  <!-- Background -->
+  <rect width="1100" height="820" fill="#f8fafc" rx="12"/>
+
+  <!-- Title -->
+  <text x="550" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#0f172a">AWS Automated Incident Response Agent</text>
+  <text x="550" y="56" text-anchor="middle" font-size="11" fill="#64748b">AI-powered root cause analysis · Zero human involvement · PROBLEM / EVIDENCE / FIX</text>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SECTION 1: Solution Flow -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <rect x="20" y="70" width="1060" height="120" rx="10" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="40" y="90" font-size="10" font-weight="700" fill="#64748b" letter-spacing="0.08em">SOLUTION FLOW</text>
+
+  <!-- Flow boxes -->
+  <!-- CloudWatch -->
+  <rect x="40" y="100" width="130" height="52" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="105" y="122" text-anchor="middle" font-size="10" font-weight="700" fill="#92400e">☁ CloudWatch</text>
+  <text x="105" y="138" text-anchor="middle" font-size="9" fill="#92400e">Alarm fires</text>
+
+  <polygon points="176,126 186,126 186,122 196,126 186,130 186,126" fill="#94a3b8"/>
+
+  <!-- SNS -->
+  <rect x="200" y="100" width="120" height="52" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+  <text x="260" y="122" text-anchor="middle" font-size="10" font-weight="700" fill="#9a3412">📣 SNS Topic</text>
+  <text x="260" y="138" text-anchor="middle" font-size="9" fill="#9a3412">Publishes event</text>
+
+  <polygon points="326,126 336,126 336,122 346,126 336,130 336,126" fill="#94a3b8"/>
+
+  <!-- Lambda -->
+  <rect x="350" y="100" width="130" height="52" rx="8" fill="#fdf4ff" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="415" y="118" text-anchor="middle" font-size="10" font-weight="700" fill="#6b21a8">λ Lambda</text>
+  <text x="415" y="132" text-anchor="middle" font-size="9" fill="#6b21a8">Detects pattern</text>
+  <text x="415" y="145" text-anchor="middle" font-size="9" fill="#6b21a8">Builds prompt</text>
+
+  <polygon points="486,126 496,126 496,122 506,126 496,130 496,126" fill="#94a3b8"/>
+
+  <!-- Agent -->
+  <rect x="510" y="95" width="150" height="62" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="585" y="113" text-anchor="middle" font-size="10" font-weight="700" fill="#4c1d95">🤖 Bedrock Agent</text>
+  <text x="585" y="126" text-anchor="middle" font-size="9" fill="#4c1d95">ECS Fargate · LangGraph</text>
+  <text x="585" y="139" text-anchor="middle" font-size="9" font-weight="700" fill="#7c3aed">Claude 3 Sonnet</text>
+  <text x="585" y="151" text-anchor="middle" font-size="8" fill="#6d28d9">Amazon Bedrock</text>
+
+  <polygon points="666,126 676,126 676,122 686,126 676,130 676,126" fill="#94a3b8"/>
+
+  <!-- AWS APIs -->
+  <rect x="690" y="100" width="150" height="52" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="765" y="120" text-anchor="middle" font-size="10" font-weight="700" fill="#1e40af">⚙ AWS APIs</text>
+  <text x="765" y="134" text-anchor="middle" font-size="9" fill="#1e40af">CloudTrail · ECS · EC2</text>
+  <text x="765" y="147" text-anchor="middle" font-size="9" fill="#1e40af">ELBv2 · SG · SSM</text>
+
+  <polygon points="846,126 856,126 856,122 866,126 856,130 856,126" fill="#94a3b8"/>
+
+  <!-- SES Email -->
+  <rect x="870" y="100" width="130" height="52" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="935" y="120" text-anchor="middle" font-size="10" font-weight="700" fill="#166534">✉ SES Email</text>
+  <text x="935" y="134" text-anchor="middle" font-size="9" fill="#166534">PROBLEM</text>
+  <text x="935" y="147" text-anchor="middle" font-size="9" fill="#166534">EVIDENCE · FIX</text>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SECTION 2: 5 Architecture Patterns -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <rect x="20" y="205" width="1060" height="440" rx="10" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="40" y="225" font-size="10" font-weight="700" fill="#64748b" letter-spacing="0.08em">5 ENTERPRISE ARCHITECTURE PATTERNS — PALO ALTO ENIC IN ALL TRAFFIC PATHS</text>
+
+  <!-- ── Pattern 1 ── -->
+  <rect x="35" y="233" width="500" height="115" rx="8" fill="#fffbeb" stroke="#fbbf24" stroke-width="1.5"/>
+  <rect x="35" y="233" width="500" height="24" rx="8" fill="#fbbf24"/>
+  <rect x="35" y="245" width="500" height="12" fill="#fbbf24"/>
+  <text x="52" y="250" font-size="10" font-weight="800" fill="white">P1</text>
+  <text x="75" y="250" font-size="10" font-weight="700" fill="white">ALB → Palo Alto ENIC → EC2 (Business Account)</text>
+  <text x="480" y="250" text-anchor="end" font-size="9" fill="rgba(255,255,255,0.85)">alarm prefix: p1-</text>
+
+  <!-- P1 flow -->
+  <rect x="50" y="265" width="62" height="32" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="81" y="278" text-anchor="middle" font-size="9" font-weight="600" fill="#475569">Internet</text>
+  <text x="81" y="290" text-anchor="middle" font-size="8" fill="#64748b">Users</text>
+
+  <polygon points="116,281 124,281 124,278 132,281 124,284 124,281" fill="#94a3b8"/>
+
+  <rect x="136" y="265" width="72" height="32" rx="5" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="172" y="278" text-anchor="middle" font-size="9" font-weight="600" fill="#1e40af">Public ALB</text>
+  <text x="172" y="290" text-anchor="middle" font-size="8" fill="#1e40af">Network Acc</text>
+
+  <polygon points="212,281 220,281 220,278 228,281 220,284 220,281" fill="#94a3b8"/>
+
+  <rect x="232" y="260" width="80" height="42" rx="5" fill="#fef9c3" stroke="#fde047" stroke-width="1.5"/>
+  <text x="272" y="275" text-anchor="middle" font-size="9" font-weight="700" fill="#854d0e">🔥 Palo Alto</text>
+  <text x="272" y="288" text-anchor="middle" font-size="8" fill="#854d0e">ENIC</text>
+  <text x="272" y="299" text-anchor="middle" font-size="8" fill="#854d0e">Security Insp.</text>
+
+  <polygon points="316,281 324,281 324,278 332,281 324,284 324,281" fill="#94a3b8"/>
+
+  <rect x="336" y="265" width="80" height="32" rx="5" fill="#fff7ed" stroke="#fed7aa" stroke-width="1"/>
+  <text x="376" y="278" text-anchor="middle" font-size="9" font-weight="600" fill="#9a3412">EC2 Instance</text>
+  <text x="376" y="290" text-anchor="middle" font-size="8" fill="#9a3412">Business Acc</text>
+
+  <!-- P1 failures -->
+  <text x="50" y="318" font-size="8" font-weight="700" fill="#64748b">FAILURE SCENARIOS:</text>
+  <rect x="50" y="323" width="68" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="84" y="333" text-anchor="middle" font-size="8" fill="#991b1b">SG blocked</text>
+  <rect x="124" y="323" width="62" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="155" y="333" text-anchor="middle" font-size="8" fill="#991b1b">App crash</text>
+  <rect x="192" y="323" width="68" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="226" y="333" text-anchor="middle" font-size="8" fill="#991b1b">OOMKilled</text>
+  <rect x="266" y="323" width="68" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="300" y="333" text-anchor="middle" font-size="8" fill="#991b1b">SSM stop svc</text>
+  <rect x="340" y="323" width="68" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="374" y="333" text-anchor="middle" font-size="8" fill="#991b1b">Bad deploy</text>
+
+  <!-- ── Pattern 2 ── -->
+  <rect x="545" y="233" width="520" height="115" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <rect x="545" y="233" width="520" height="24" rx="8" fill="#3b82f6"/>
+  <rect x="545" y="245" width="520" height="12" fill="#3b82f6"/>
+  <text x="562" y="250" font-size="10" font-weight="800" fill="white">P2</text>
+  <text x="585" y="250" font-size="10" font-weight="700" fill="white">ALB → Palo Alto ENIC → NLB → ECS Fargate</text>
+  <text x="1050" y="250" text-anchor="end" font-size="9" fill="rgba(255,255,255,0.85)">alarm prefix: p2-</text>
+
+  <rect x="560" y="265" width="56" height="32" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="588" y="281" text-anchor="middle" font-size="9" font-weight="600" fill="#475569">Internet</text>
+
+  <polygon points="620,281 628,281 628,278 636,281 628,284 628,281" fill="#94a3b8"/>
+
+  <rect x="640" y="265" width="66" height="32" rx="5" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="673" y="278" text-anchor="middle" font-size="9" font-weight="600" fill="#1e40af">Public ALB</text>
+  <text x="673" y="290" text-anchor="middle" font-size="8" fill="#1e40af">Net. Acc</text>
+
+  <polygon points="710,281 718,281 718,278 726,281 718,284 718,281" fill="#94a3b8"/>
+
+  <rect x="730" y="260" width="74" height="42" rx="5" fill="#fef9c3" stroke="#fde047" stroke-width="1.5"/>
+  <text x="767" y="275" text-anchor="middle" font-size="9" font-weight="700" fill="#854d0e">🔥 Palo Alto</text>
+  <text x="767" y="286" text-anchor="middle" font-size="8" fill="#854d0e">ENIC</text>
+  <text x="767" y="297" text-anchor="middle" font-size="8" fill="#854d0e">Sec. Insp.</text>
+
+  <polygon points="808,281 816,281 816,278 824,281 816,284 816,281" fill="#94a3b8"/>
+
+  <rect x="828" y="265" width="56" height="32" rx="5" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="856" y="278" text-anchor="middle" font-size="9" font-weight="600" fill="#166534">NLB</text>
+  <text x="856" y="290" text-anchor="middle" font-size="8" fill="#166534">Biz Acc</text>
+
+  <polygon points="888,281 896,281 896,278 904,281 896,284 896,281" fill="#94a3b8"/>
+
+  <rect x="908" y="265" width="80" height="32" rx="5" fill="#eff6ff" stroke="#93c5fd" stroke-width="1"/>
+  <text x="948" y="278" text-anchor="middle" font-size="9" font-weight="600" fill="#1e40af">ECS Fargate</text>
+  <text x="948" y="290" text-anchor="middle" font-size="8" fill="#1e40af">Business Acc</text>
+
+  <text x="560" y="318" font-size="8" font-weight="700" fill="#64748b">FAILURE SCENARIOS:</text>
+  <rect x="560" y="323" width="58" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="589" y="333" text-anchor="middle" font-size="8" fill="#991b1b">Scale to 0</text>
+  <rect x="624" y="323" width="58" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="653" y="333" text-anchor="middle" font-size="8" fill="#991b1b">SG revoked</text>
+  <rect x="688" y="323" width="58" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="717" y="333" text-anchor="middle" font-size="8" fill="#991b1b">Bad image</text>
+  <rect x="752" y="323" width="72" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="788" y="333" text-anchor="middle" font-size="8" fill="#991b1b">NLB deleted</text>
+  <rect x="830" y="323" width="68" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="864" y="333" text-anchor="middle" font-size="8" fill="#991b1b">OOMKilled</text>
+
+  <!-- ── Pattern 3 ── -->
+  <rect x="35" y="360" width="500" height="120" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+  <rect x="35" y="360" width="500" height="24" rx="8" fill="#22c55e"/>
+  <rect x="35" y="372" width="500" height="12" fill="#22c55e"/>
+  <text x="52" y="377" font-size="10" font-weight="800" fill="white">P3</text>
+  <text x="75" y="377" font-size="10" font-weight="700" fill="white">ALB → PA → NLB → Internal ALB → ECS Fargate</text>
+  <text x="480" y="377" text-anchor="end" font-size="9" fill="rgba(255,255,255,0.85)">alarm prefix: p3-</text>
+
+  <rect x="50" y="392" width="50" height="28" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="75" y="410" text-anchor="middle" font-size="8" font-weight="600" fill="#475569">Internet</text>
+  <polygon points="104,406 112,406 112,403 119,406 112,409 112,406" fill="#94a3b8"/>
+  <rect x="123" y="392" width="60" height="28" rx="5" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="153" y="406" text-anchor="middle" font-size="8" font-weight="600" fill="#1e40af">Public ALB</text>
+  <text x="153" y="416" text-anchor="middle" font-size="7" fill="#1e40af">Net. Acc</text>
+  <polygon points="187,406 195,406 195,403 202,406 195,409 195,406" fill="#94a3b8"/>
+  <rect x="206" y="388" width="68" height="36" rx="5" fill="#fef9c3" stroke="#fde047" stroke-width="1.5"/>
+  <text x="240" y="402" text-anchor="middle" font-size="8" font-weight="700" fill="#854d0e">🔥 PA ENIC</text>
+  <text x="240" y="416" text-anchor="middle" font-size="7" fill="#854d0e">Security</text>
+  <polygon points="278,406 286,406 286,403 293,406 286,409 286,406" fill="#94a3b8"/>
+  <rect x="297" y="392" width="44" height="28" rx="5" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="319" y="409" text-anchor="middle" font-size="8" font-weight="600" fill="#166534">NLB</text>
+  <polygon points="345,406 353,406 353,403 360,406 353,409 353,406" fill="#94a3b8"/>
+  <rect x="364" y="392" width="60" height="28" rx="5" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1"/>
+  <text x="394" y="404" text-anchor="middle" font-size="8" font-weight="600" fill="#065f46">Internal</text>
+  <text x="394" y="415" text-anchor="middle" font-size="8" font-weight="600" fill="#065f46">ALB</text>
+  <polygon points="428,406 436,406 436,403 443,406 436,409 436,406" fill="#94a3b8"/>
+  <rect x="447" y="392" width="70" height="28" rx="5" fill="#eff6ff" stroke="#93c5fd" stroke-width="1"/>
+  <text x="482" y="403" text-anchor="middle" font-size="8" font-weight="600" fill="#1e40af">ECS Fargate</text>
+  <text x="482" y="414" text-anchor="middle" font-size="7" fill="#1e40af">Biz Acc</text>
+
+  <text x="50" y="440" font-size="8" font-weight="700" fill="#64748b">FAILURE SCENARIOS:</text>
+  <rect x="50" y="445" width="74" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="87" y="455" text-anchor="middle" font-size="8" fill="#991b1b">Int. ALB deleted</text>
+  <rect x="130" y="445" width="68" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="164" y="455" text-anchor="middle" font-size="8" fill="#991b1b">SG blocked</text>
+  <rect x="204" y="445" width="68" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="238" y="455" text-anchor="middle" font-size="8" fill="#991b1b">NLB SG issue</text>
+  <rect x="278" y="445" width="64" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="310" y="455" text-anchor="middle" font-size="8" fill="#991b1b">Bad image</text>
+
+  <!-- ── Pattern 4 ── -->
+  <rect x="545" y="360" width="520" height="120" rx="8" fill="#faf5ff" stroke="#a855f7" stroke-width="1.5"/>
+  <rect x="545" y="360" width="520" height="24" rx="8" fill="#a855f7"/>
+  <rect x="545" y="372" width="520" height="12" fill="#a855f7"/>
+  <text x="562" y="377" font-size="10" font-weight="800" fill="white">P4</text>
+  <text x="585" y="377" font-size="10" font-weight="700" fill="white">ALB → PA → VPC Interface Endpoint → API Gateway</text>
+  <text x="1050" y="377" text-anchor="end" font-size="9" fill="rgba(255,255,255,0.85)">alarm prefix: p4-</text>
+
+  <rect x="560" y="392" width="50" height="28" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="585" y="410" text-anchor="middle" font-size="8" font-weight="600" fill="#475569">Internet</text>
+  <polygon points="614,406 622,406 622,403 629,406 622,409 622,406" fill="#94a3b8"/>
+  <rect x="633" y="392" width="60" height="28" rx="5" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="663" y="406" text-anchor="middle" font-size="8" font-weight="600" fill="#1e40af">Public ALB</text>
+  <text x="663" y="416" text-anchor="middle" font-size="7" fill="#1e40af">Net. Acc</text>
+  <polygon points="697,406 705,406 705,403 712,406 705,409 705,406" fill="#94a3b8"/>
+  <rect x="716" y="388" width="68" height="36" rx="5" fill="#fef9c3" stroke="#fde047" stroke-width="1.5"/>
+  <text x="750" y="402" text-anchor="middle" font-size="8" font-weight="700" fill="#854d0e">🔥 PA ENIC</text>
+  <text x="750" y="416" text-anchor="middle" font-size="7" fill="#854d0e">Security</text>
+  <polygon points="788,406 796,406 796,403 803,406 796,409 796,406" fill="#94a3b8"/>
+  <rect x="807" y="392" width="80" height="28" rx="5" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1"/>
+  <text x="847" y="403" text-anchor="middle" font-size="8" font-weight="600" fill="#5b21b6">VPC Interface</text>
+  <text x="847" y="414" text-anchor="middle" font-size="8" font-weight="600" fill="#5b21b6">Endpoint</text>
+  <polygon points="891,406 899,406 899,403 906,406 899,409 899,406" fill="#94a3b8"/>
+  <rect x="910" y="392" width="80" height="28" rx="5" fill="#fdf4ff" stroke="#e879f9" stroke-width="1"/>
+  <text x="950" y="403" text-anchor="middle" font-size="8" font-weight="600" fill="#701a75">API Gateway</text>
+  <text x="950" y="414" text-anchor="middle" font-size="7" fill="#701a75">Private</text>
+
+  <text x="560" y="440" font-size="8" font-weight="700" fill="#64748b">FAILURE SCENARIOS:</text>
+  <rect x="560" y="445" width="78" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="599" y="455" text-anchor="middle" font-size="8" fill="#991b1b">Endpoint deleted</text>
+  <rect x="644" y="445" width="74" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="681" y="455" text-anchor="middle" font-size="8" fill="#991b1b">Domain mapping</text>
+  <rect x="724" y="445" width="68" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="758" y="455" text-anchor="middle" font-size="8" fill="#991b1b">SG blocked</text>
+  <rect x="798" y="445" width="80" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="838" y="455" text-anchor="middle" font-size="8" fill="#991b1b">Stage not deployed</text>
+
+  <!-- ── Pattern 5 ── -->
+  <rect x="35" y="492" width="1030" height="120" rx="8" fill="#fff1f2" stroke="#f43f5e" stroke-width="1.5"/>
+  <rect x="35" y="492" width="1030" height="24" rx="8" fill="#f43f5e"/>
+  <rect x="35" y="504" width="1030" height="12" fill="#f43f5e"/>
+  <text x="52" y="509" font-size="10" font-weight="800" fill="white">P5</text>
+  <text x="75" y="509" font-size="10" font-weight="700" fill="white">ALB → Palo Alto ENIC → VPC Gateway Endpoint → S3 Static Website</text>
+  <text x="1050" y="509" text-anchor="end" font-size="9" fill="rgba(255,255,255,0.85)">alarm prefix: p5-</text>
+
+  <rect x="60" y="524" width="54" height="28" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="87" y="542" text-anchor="middle" font-size="8" font-weight="600" fill="#475569">Internet</text>
+  <polygon points="118,538 126,538 126,535 133,538 126,541 126,538" fill="#94a3b8"/>
+  <rect x="137" y="524" width="64" height="28" rx="5" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="169" y="536" text-anchor="middle" font-size="8" font-weight="600" fill="#1e40af">Public ALB</text>
+  <text x="169" y="547" text-anchor="middle" font-size="7" fill="#1e40af">Network Acc</text>
+  <polygon points="205,538 213,538 213,535 220,538 213,541 213,538" fill="#94a3b8"/>
+  <rect x="224" y="520" width="76" height="36" rx="5" fill="#fef9c3" stroke="#fde047" stroke-width="1.5"/>
+  <text x="262" y="535" text-anchor="middle" font-size="9" font-weight="700" fill="#854d0e">🔥 PA ENIC</text>
+  <text x="262" y="547" text-anchor="middle" font-size="8" fill="#854d0e">Security Insp.</text>
+  <polygon points="304,538 312,538 312,535 319,538 312,541 312,538" fill="#94a3b8"/>
+  <rect x="323" y="524" width="84" height="28" rx="5" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1"/>
+  <text x="365" y="534" text-anchor="middle" font-size="8" font-weight="600" fill="#5b21b6">VPC Gateway</text>
+  <text x="365" y="546" text-anchor="middle" font-size="8" font-weight="600" fill="#5b21b6">Endpoint (S3)</text>
+  <polygon points="411,538 419,538 419,535 426,538 419,541 419,538" fill="#94a3b8"/>
+  <rect x="430" y="524" width="80" height="28" rx="5" fill="#fff1f2" stroke="#fda4af" stroke-width="1"/>
+  <text x="470" y="536" text-anchor="middle" font-size="8" font-weight="600" fill="#9f1239">S3 Bucket</text>
+  <text x="470" y="547" text-anchor="middle" font-size="7" fill="#9f1239">Static Website</text>
+
+  <text x="60" y="572" font-size="8" font-weight="700" fill="#64748b">FAILURE SCENARIOS:</text>
+  <rect x="60" y="577" width="78" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="99" y="587" text-anchor="middle" font-size="8" fill="#991b1b">Endpoint deleted</text>
+  <rect x="144" y="577" width="88" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="188" y="587" text-anchor="middle" font-size="8" fill="#991b1b">Bucket policy blocked</text>
+  <rect x="238" y="577" width="88" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="282" y="587" text-anchor="middle" font-size="8" fill="#991b1b">Website config disabled</text>
+  <rect x="332" y="577" width="78" height="14" rx="3" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="371" y="587" text-anchor="middle" font-size="8" fill="#991b1b">Endpoint SG blocked</text>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SECTION 3: Agent Investigation Steps -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <rect x="20" y="660" width="1060" height="140" rx="10" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="40" y="680" font-size="10" font-weight="700" fill="#64748b" letter-spacing="0.08em">AGENT INVESTIGATION LOGIC (APPLIES TO ALL PATTERNS)</text>
+
+  <!-- Step boxes -->
+  <rect x="35" y="688" width="168" height="60" rx="7" fill="#f8fafc" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="119" y="706" text-anchor="middle" font-size="9" font-weight="800" fill="#6366f1">STEP 1</text>
+  <text x="119" y="720" text-anchor="middle" font-size="9" font-weight="700" fill="#1e293b">Palo Alto Check</text>
+  <text x="119" y="733" text-anchor="middle" font-size="8" fill="#64748b">Instance state · SG</text>
+  <text x="119" y="745" text-anchor="middle" font-size="8" fill="#64748b">Route tables</text>
+
+  <polygon points="207,718 215,718 215,715 222,718 215,721 215,718" fill="#94a3b8"/>
+
+  <rect x="226" y="688" width="168" height="60" rx="7" fill="#f8fafc" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="310" y="706" text-anchor="middle" font-size="9" font-weight="800" fill="#6366f1">STEP 2</text>
+  <text x="310" y="720" text-anchor="middle" font-size="9" font-weight="700" fill="#1e293b">Infrastructure Layer</text>
+  <text x="310" y="733" text-anchor="middle" font-size="8" fill="#64748b">NLB/ALB listeners · SGs</text>
+  <text x="310" y="745" text-anchor="middle" font-size="8" fill="#64748b">VPC endpoints state</text>
+
+  <polygon points="398,718 406,718 406,715 413,718 406,721 406,718" fill="#94a3b8"/>
+
+  <rect x="417" y="688" width="168" height="60" rx="7" fill="#f8fafc" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="501" y="706" text-anchor="middle" font-size="9" font-weight="800" fill="#6366f1">STEP 3</text>
+  <text x="501" y="720" text-anchor="middle" font-size="9" font-weight="700" fill="#1e293b">Compute Layer</text>
+  <text x="501" y="733" text-anchor="middle" font-size="8" fill="#64748b">ECS desired/running</text>
+  <text x="501" y="745" text-anchor="middle" font-size="8" fill="#64748b">EC2 instance state</text>
+
+  <polygon points="589,718 597,718 597,715 604,718 597,721 597,718" fill="#94a3b8"/>
+
+  <rect x="608" y="688" width="168" height="60" rx="7" fill="#f8fafc" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="692" y="706" text-anchor="middle" font-size="9" font-weight="800" fill="#6366f1">STEP 4</text>
+  <text x="692" y="720" text-anchor="middle" font-size="9" font-weight="700" fill="#1e293b">Application Health</text>
+  <text x="692" y="733" text-anchor="middle" font-size="8" fill="#64748b">Exit codes · Container logs</text>
+  <text x="692" y="745" text-anchor="middle" font-size="8" fill="#64748b">CPU / memory metrics</text>
+
+  <polygon points="780,718 788,718 788,715 795,718 788,721 788,718" fill="#94a3b8"/>
+
+  <rect x="799" y="688" width="168" height="60" rx="7" fill="#f8fafc" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="883" y="706" text-anchor="middle" font-size="9" font-weight="800" fill="#6366f1">STEP 5</text>
+  <text x="883" y="720" text-anchor="middle" font-size="9" font-weight="700" fill="#1e293b">CloudTrail (2h window)</text>
+  <text x="883" y="733" text-anchor="middle" font-size="8" fill="#64748b">Who changed what</text>
+  <text x="883" y="745" text-anchor="middle" font-size="8" fill="#64748b">User · Method · Timestamp</text>
+
+  <polygon points="971,718 979,718 979,715 986,718 979,721 979,718" fill="#94a3b8"/>
+
+  <rect x="990" y="688" width="80" height="60" rx="7" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="1030" y="704" text-anchor="middle" font-size="9" font-weight="800" fill="#166534">OUTPUT</text>
+  <text x="1030" y="718" text-anchor="middle" font-size="8" font-weight="700" fill="#166534">PROBLEM</text>
+  <text x="1030" y="730" text-anchor="middle" font-size="8" fill="#166534">EVIDENCE</text>
+  <text x="1030" y="742" text-anchor="middle" font-size="8" fill="#166534">FIX</text>
+
+  <!-- Footer -->
+  <text x="550" y="810" text-anchor="middle" font-size="9" fill="#94a3b8">🔒 No credentials hardcoded · Agent is read-only · CloudTrail audits all API calls · ECS Exec blocked by SCP</text>
+
+</svg>
