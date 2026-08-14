@@ -1,0 +1,188 @@
+<svg viewBox="0 0 960 520" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif" role="img">
+  <title>AWS Automated Incident Response Agent — End-to-End Flow</title>
+  <desc>CloudWatch alarm state change triggers an EventBridge rule, which invokes Lambda. Lambda detects the alarm pattern, builds an investigation prompt, and calls the ECS Fargate LangGraph agent. The agent iteratively calls AWS APIs via Amazon Bedrock (Claude 3 Sonnet) to find root cause, then sends a PROBLEM/EVIDENCE/FIX email via SES to the Cloud Operations team.</desc>
+
+  <!-- Background -->
+  <rect width="960" height="520" fill="#0F1923" rx="12"/>
+
+  <!-- Title -->
+  <text x="480" y="38" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF" letter-spacing="0.5">AWS Automated Incident Response — End-to-End Flow</text>
+  <text x="480" y="58" text-anchor="middle" font-size="12" fill="#8A9BAE">Alarm fires → AI investigates → Email sent in &lt; 2 minutes. Zero human involvement.</text>
+
+  <!-- Step 1: CloudWatch -->
+  <g transform="translate(30,90)">
+    <rect width="120" height="100" rx="10" fill="#1C2B3A" stroke="#E8742A" stroke-width="2"/>
+    <text x="60" y="25" text-anchor="middle" font-size="20">📊</text>
+    <text x="60" y="54" text-anchor="middle" font-size="11" font-weight="700" fill="#E8742A">CloudWatch</text>
+    <text x="60" y="69" text-anchor="middle" font-size="10" fill="#8A9BAE">Alarm fires</text>
+    <text x="60" y="83" text-anchor="middle" font-size="10" fill="#8A9BAE">HealthyHostCount</text>
+    <text x="60" y="97" text-anchor="middle" font-size="10" fill="#8A9BAE">&lt; 1</text>
+  </g>
+
+  <!-- Arrow 1: CW → EventBridge -->
+  <g transform="translate(158,128)">
+    <line x1="0" y1="12" x2="44" y2="12" stroke="#E8742A" stroke-width="2" stroke-dasharray="4,3"/>
+    <polygon points="44,7 54,12 44,17" fill="#E8742A"/>
+    <text x="27" y="28" text-anchor="middle" font-size="9" fill="#8A9BAE">alarm state</text>
+    <text x="27" y="39" text-anchor="middle" font-size="9" fill="#8A9BAE">change event</text>
+  </g>
+
+  <!-- Step 2: EventBridge -->
+  <g transform="translate(220,90)">
+    <rect width="120" height="100" rx="10" fill="#1C2B3A" stroke="#E8742A" stroke-width="2"/>
+    <text x="60" y="25" text-anchor="middle" font-size="20">⚡</text>
+    <text x="60" y="54" text-anchor="middle" font-size="11" font-weight="700" fill="#E8742A">EventBridge</text>
+    <text x="60" y="69" text-anchor="middle" font-size="10" fill="#8A9BAE">Rule matches</text>
+    <text x="60" y="83" text-anchor="middle" font-size="10" fill="#8A9BAE">ALARM state</text>
+    <text x="60" y="97" text-anchor="middle" font-size="10" fill="#8A9BAE">→ triggers Lambda</text>
+  </g>
+
+  <!-- Arrow 2: EventBridge → Lambda -->
+  <g transform="translate(348,128)">
+    <line x1="0" y1="12" x2="44" y2="12" stroke="#E8742A" stroke-width="2" stroke-dasharray="4,3"/>
+    <polygon points="44,7 54,12 44,17" fill="#E8742A"/>
+    <text x="27" y="28" text-anchor="middle" font-size="9" fill="#8A9BAE">invokes</text>
+  </g>
+
+  <!-- Step 3: Lambda -->
+  <g transform="translate(410,90)">
+    <rect width="120" height="100" rx="10" fill="#1C2B3A" stroke="#FF9900" stroke-width="2"/>
+    <text x="60" y="25" text-anchor="middle" font-size="20">λ</text>
+    <text x="60" y="54" text-anchor="middle" font-size="11" font-weight="700" fill="#FF9900">Lambda</text>
+    <text x="60" y="69" text-anchor="middle" font-size="10" fill="#8A9BAE">Detects pattern</text>
+    <text x="60" y="83" text-anchor="middle" font-size="10" fill="#8A9BAE">Builds prompt</text>
+    <text x="60" y="97" text-anchor="middle" font-size="10" fill="#8A9BAE">Calls agent API</text>
+  </g>
+
+  <!-- Arrow 3: Lambda → ECS -->
+  <g transform="translate(538,128)">
+    <line x1="0" y1="12" x2="44" y2="12" stroke="#FF9900" stroke-width="2" stroke-dasharray="4,3"/>
+    <polygon points="44,7 54,12 44,17" fill="#FF9900"/>
+    <text x="27" y="28" text-anchor="middle" font-size="9" fill="#8A9BAE">HTTP POST</text>
+    <text x="27" y="39" text-anchor="middle" font-size="9" fill="#8A9BAE">/investigate</text>
+  </g>
+
+  <!-- Step 4: ECS Agent -->
+  <g transform="translate(590,70)">
+    <rect width="150" height="130" rx="10" fill="#1C2B3A" stroke="#00A1C9" stroke-width="2.5"/>
+    <text x="75" y="27" text-anchor="middle" font-size="18">🤖</text>
+    <text x="75" y="58" text-anchor="middle" font-size="11" font-weight="700" fill="#00A1C9">ECS Fargate</text>
+    <text x="75" y="73" text-anchor="middle" font-size="10" fill="#00A1C9">LangGraph Agent</text>
+    <line x1="15" y1="82" x2="135" y2="82" stroke="#2A3F52" stroke-width="1"/>
+    <text x="75" y="96" text-anchor="middle" font-size="9" fill="#8A9BAE">↕ Calls AWS APIs</text>
+    <text x="75" y="110" text-anchor="middle" font-size="9" fill="#8A9BAE">CloudTrail · ECS · EC2</text>
+    <text x="75" y="124" text-anchor="middle" font-size="9" fill="#8A9BAE">ALB · SG · SSM</text>
+  </g>
+
+  <!-- Double arrow: ECS ↔ Bedrock -->
+  <g transform="translate(748,118)">
+    <line x1="0" y1="12" x2="54" y2="12" stroke="#7B68EE" stroke-width="2" stroke-dasharray="4,3"/>
+    <polygon points="54,7 64,12 54,17" fill="#7B68EE"/>
+    <polygon points="10,7 0,12 10,17" fill="#7B68EE"/>
+    <text x="32" y="28" text-anchor="middle" font-size="9" fill="#8A9BAE">tool calls</text>
+    <text x="32" y="39" text-anchor="middle" font-size="9" fill="#8A9BAE">+ responses</text>
+  </g>
+
+  <!-- Step 5: Bedrock -->
+  <g transform="translate(820,70)">
+    <rect width="120" height="130" rx="10" fill="#1C2B3A" stroke="#7B68EE" stroke-width="2"/>
+    <text x="60" y="27" text-anchor="middle" font-size="18">🧠</text>
+    <text x="60" y="58" text-anchor="middle" font-size="11" font-weight="700" fill="#7B68EE">Bedrock</text>
+    <text x="60" y="73" text-anchor="middle" font-size="10" fill="#7B68EE">Claude 3 Sonnet</text>
+    <line x1="15" y1="82" x2="105" y2="82" stroke="#2A3F52" stroke-width="1"/>
+    <text x="60" y="96" text-anchor="middle" font-size="9" fill="#8A9BAE">Decides which</text>
+    <text x="60" y="110" text-anchor="middle" font-size="9" fill="#8A9BAE">API to call next</text>
+    <text x="60" y="124" text-anchor="middle" font-size="9" fill="#8A9BAE">temp=0</text>
+  </g>
+
+  <!-- Arrow down: ECS → SES -->
+  <g transform="translate(665,208)">
+    <line x1="0" y1="0" x2="0" y2="44" stroke="#4CAF7D" stroke-width="2" stroke-dasharray="4,3"/>
+    <polygon points="-5,44 0,54 5,44" fill="#4CAF7D"/>
+    <text x="15" y="20" font-size="9" fill="#8A9BAE">RCA found</text>
+  </g>
+
+  <!-- Step 6: SES -->
+  <g transform="translate(605,270)">
+    <rect width="120" height="100" rx="10" fill="#1C2B3A" stroke="#4CAF7D" stroke-width="2"/>
+    <text x="60" y="23" text-anchor="middle" font-size="18">📧</text>
+    <text x="60" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="#4CAF7D">Amazon SES</text>
+    <text x="60" y="67" text-anchor="middle" font-size="10" fill="#8A9BAE">Renders HTML</text>
+    <text x="60" y="81" text-anchor="middle" font-size="10" fill="#8A9BAE">email report</text>
+    <text x="60" y="95" text-anchor="middle" font-size="10" fill="#8A9BAE">Sends to team</text>
+  </g>
+
+  <!-- Arrow: SES → Ops -->
+  <g transform="translate(733,308)">
+    <line x1="0" y1="12" x2="44" y2="12" stroke="#4CAF7D" stroke-width="2" stroke-dasharray="4,3"/>
+    <polygon points="44,7 54,12 44,17" fill="#4CAF7D"/>
+  </g>
+
+  <!-- Step 7: Cloud Ops -->
+  <g transform="translate(795,255)">
+    <rect width="145" height="115" rx="10" fill="#1C2B3A" stroke="#4CAF7D" stroke-width="2"/>
+    <text x="72" y="23" text-anchor="middle" font-size="18">👩‍💻</text>
+    <text x="72" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="#4CAF7D">Cloud Ops Team</text>
+    <line x1="12" y1="62" x2="133" y2="62" stroke="#2A3F52" stroke-width="1"/>
+    <text x="72" y="76" text-anchor="middle" font-size="9" fill="#FFFFFF" font-weight="600">PROBLEM</text>
+    <text x="72" y="90" text-anchor="middle" font-size="9" fill="#FFFFFF" font-weight="600">EVIDENCE</text>
+    <text x="72" y="104" text-anchor="middle" font-size="9" fill="#FFFFFF" font-weight="600">FIX command</text>
+    <text x="72" y="116" text-anchor="middle" font-size="8" fill="#8A9BAE">email in &lt; 2 min</text>
+  </g>
+
+  <!-- Investigation loop -->
+  <g transform="translate(560,390)">
+    <rect width="390" height="112" rx="8" fill="#0D1E2C" stroke="#2A3F52" stroke-width="1.5"/>
+    <text x="195" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#00A1C9">LangGraph ReAct Investigation Loop</text>
+    <line x1="20" y1="30" x2="370" y2="30" stroke="#2A3F52" stroke-width="1"/>
+    <rect x="10" y="40" width="68" height="34" rx="5" fill="#1C2B3A" stroke="#E8742A" stroke-width="1"/>
+    <text x="44" y="56" text-anchor="middle" font-size="9" fill="#E8742A" font-weight="600">① Security</text>
+    <text x="44" y="68" text-anchor="middle" font-size="8" fill="#8A9BAE">inspection layer</text>
+    <text x="88" y="61" text-anchor="middle" font-size="14" fill="#2A3F52">→</text>
+    <rect x="96" y="40" width="68" height="34" rx="5" fill="#1C2B3A" stroke="#FF9900" stroke-width="1"/>
+    <text x="130" y="56" text-anchor="middle" font-size="9" fill="#FF9900" font-weight="600">② Infra</text>
+    <text x="130" y="68" text-anchor="middle" font-size="8" fill="#8A9BAE">NLB · ALB · VPC EP</text>
+    <text x="174" y="61" text-anchor="middle" font-size="14" fill="#2A3F52">→</text>
+    <rect x="182" y="40" width="68" height="34" rx="5" fill="#1C2B3A" stroke="#FF9900" stroke-width="1"/>
+    <text x="216" y="56" text-anchor="middle" font-size="9" fill="#FF9900" font-weight="600">③ Compute</text>
+    <text x="216" y="68" text-anchor="middle" font-size="8" fill="#8A9BAE">ECS · EC2 state</text>
+    <text x="260" y="61" text-anchor="middle" font-size="14" fill="#2A3F52">→</text>
+    <rect x="268" y="40" width="68" height="34" rx="5" fill="#1C2B3A" stroke="#00A1C9" stroke-width="1"/>
+    <text x="302" y="56" text-anchor="middle" font-size="9" fill="#00A1C9" font-weight="600">④ App health</text>
+    <text x="302" y="68" text-anchor="middle" font-size="8" fill="#8A9BAE">logs · exit codes</text>
+    <text x="346" y="61" text-anchor="middle" font-size="14" fill="#2A3F52">→</text>
+    <rect x="354" y="40" width="26" height="34" rx="5" fill="#1C2B3A" stroke="#7B68EE" stroke-width="1"/>
+    <text x="367" y="61" text-anchor="middle" font-size="9" fill="#7B68EE" font-weight="600">⑤</text>
+    <text x="195" y="102" text-anchor="middle" font-size="9" fill="#8A9BAE">⑤ CloudTrail lookup — last 2 hours only · identifies exact user + timestamp</text>
+  </g>
+
+  <!-- Pattern routing box -->
+  <g transform="translate(30,390)">
+    <rect width="500" height="112" rx="8" fill="#0D1E2C" stroke="#2A3F52" stroke-width="1.5"/>
+    <text x="250" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#FF9900">5 Supported Patterns — Alarm Prefix Routing</text>
+    <line x1="20" y1="30" x2="480" y2="30" stroke="#2A3F52" stroke-width="1"/>
+    <text x="14" y="48" font-size="10" fill="#FF9900" font-weight="700">p1-</text>
+    <text x="36" y="48" font-size="10" fill="#8A9BAE">ALB → Security Layer → EC2</text>
+    <text x="14" y="64" font-size="10" fill="#FF9900" font-weight="700">p2-</text>
+    <text x="36" y="64" font-size="10" fill="#8A9BAE">ALB → Security Layer → NLB → ECS Fargate</text>
+    <text x="14" y="80" font-size="10" fill="#FF9900" font-weight="700">p3-</text>
+    <text x="36" y="80" font-size="10" fill="#8A9BAE">ALB → Security Layer → NLB → Internal ALB → ECS Fargate</text>
+    <text x="14" y="96" font-size="10" fill="#FF9900" font-weight="700">p4-</text>
+    <text x="36" y="96" font-size="10" fill="#8A9BAE">ALB → Security Layer → VPC Endpoint → API Gateway</text>
+    <text x="14" y="112" font-size="10" fill="#FF9900" font-weight="700">p5-</text>
+    <text x="36" y="112" font-size="10" fill="#8A9BAE">ALB → Security Layer → VPC Endpoint → S3 Static Site</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(30,230)">
+    <text x="0" y="14" font-size="10" font-weight="700" fill="#8A9BAE">TRIGGER CHAIN</text>
+    <line x1="0" y1="22" x2="80" y2="22" stroke="#E8742A" stroke-width="2" stroke-dasharray="4,3"/>
+    <text x="90" y="26" font-size="9" fill="#8A9BAE">CW → EventBridge → Lambda</text>
+    <text x="0" y="46" font-size="10" font-weight="700" fill="#8A9BAE">AGENT LOOP</text>
+    <line x1="0" y1="54" x2="80" y2="54" stroke="#7B68EE" stroke-width="2" stroke-dasharray="4,3"/>
+    <text x="90" y="58" font-size="9" fill="#8A9BAE">LangGraph ↔ Bedrock</text>
+    <text x="0" y="78" font-size="10" font-weight="700" fill="#8A9BAE">EMAIL PATH</text>
+    <line x1="0" y1="86" x2="80" y2="86" stroke="#4CAF7D" stroke-width="2" stroke-dasharray="4,3"/>
+    <text x="90" y="90" font-size="9" fill="#8A9BAE">SES → Ops Team</text>
+  </g>
+</svg>
