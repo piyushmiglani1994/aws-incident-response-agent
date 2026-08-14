@@ -57,17 +57,17 @@ Amazon SES                ← sends PROBLEM/EVIDENCE/FIX email
 
 ## Supported architecture patterns
 
-The agent supports 5 common multi-account AWS architecture patterns. Alarm names must be prefixed with the pattern code so Lambda routes to the correct investigation prompt.
+The agent supports 5 common multi-account AWS architecture patterns. Each pattern includes an **inline security inspection layer** — tested with Palo Alto ENIC, but the investigation logic works with any equivalent appliance (AWS Network Firewall, Cisco FTD, Fortinet, etc.). Alarm names must be prefixed with the pattern code so Lambda routes to the correct investigation prompt.
 
 | Prefix | Traffic path |
 |--------|-------------|
-| `p1-`  | ALB → Palo Alto ENIC → EC2 |
-| `p2-`  | ALB → Palo Alto ENIC → NLB → ECS Fargate |
-| `p3-`  | ALB → Palo Alto ENIC → NLB → Internal ALB → ECS Fargate |
-| `p4-`  | ALB → Palo Alto ENIC → VPC Endpoint → API Gateway |
-| `p5-`  | ALB → Palo Alto ENIC → VPC Endpoint → S3 static site |
+| `p1-`  | ALB → Security Inspection Layer → EC2 |
+| `p2-`  | ALB → Security Inspection Layer → NLB → ECS Fargate |
+| `p3-`  | ALB → Security Inspection Layer → NLB → Internal ALB → ECS Fargate |
+| `p4-`  | ALB → Security Inspection Layer → VPC Endpoint → API Gateway |
+| `p5-`  | ALB → Security Inspection Layer → VPC Endpoint → S3 static site |
 
-The agent checks the security inspection layer (Palo Alto ENIC or equivalent) **first** in every pattern before investigating downstream components.
+The agent always checks the security/inspection tier **first** before investigating downstream components — regardless of which vendor or appliance you use. Swap the inspection-layer API calls in `lambda_function.py` for your appliance's equivalent (EC2 instance state, SG rules, route tables).
 
 ## Investigation logic
 
