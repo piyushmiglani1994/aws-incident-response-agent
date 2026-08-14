@@ -81,15 +81,6 @@ For every alarm the agent follows this order:
 
 Only CloudTrail events from the **last 2 hours** are treated as root cause. This prevents stale audit events from creating false positives.
 
-## Tested failure scenarios
-
-| Scenario | Pattern | Result |
-|----------|---------|--------|
-| ECS service scaled to 0 | P2 | Identifies operator + exact timestamp |
-| ECS SG inbound rule revoked (CLI) | P2 | Identifies user, method, timestamp |
-| ECS SG inbound rule revoked (Console) | P2 | Catches both CLI and Console removals |
-| EC2 app stopped via SSM | P1 | SSM command identified as root cause |
-
 ## Tech stack
 
 | Component | Technology |
